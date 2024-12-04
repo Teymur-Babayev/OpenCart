@@ -1,0 +1,108 @@
+{{ header }}
+<div id="account-subscription" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    <div id="content" class="col">{{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      <div class="row row-cols-md-2">
+        <div class="col">
+          <table class="table table-bordered table-hover">
+            <tr>
+              <td><b>{{ text_subscription_id }}</b></td>
+              <td>#{{ subscription_id }}</td>
+            </tr>
+            <tr>
+              <td><b>{{ text_status }}</b></td>
+              <td>{{ subscription_status }}</td>
+            </tr>
+            <tr>
+              <td><b>{{ text_order_id }}</b></td>
+              <td>#{{ order_id }}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="table table-bordered table-hover">
+            {% if shipping_method %}
+            <tr>
+              <td><strong>{{ text_shipping_method }}</strong></td>
+              <td>{{ shipping_method }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+              <td><strong>{{ text_payment_method }}</strong></td>
+              <td>{{ payment_method }}</td>
+            </tr>
+            <tr>
+              <td><b>{{ text_date_added }}</b></td>
+              <td>{{ date_added }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      {% if payment_address or shipping_address %}
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              {% if payment_address %}
+                <td class="text-start align-top">{{ text_payment_address }}</td>
+              {% endif %}
+
+              {% if shipping_address %}
+                <td class="text-start align-top">{{ text_shipping_address }}</td>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if payment_address %}
+                <td class="text-start align-top">{{ payment_address }}</td>
+              {% endif %}
+
+              {% if shipping_address %}
+                <td class="text-start align-top">{{ shipping_address }}</td>
+              {% endif %}</tr>
+          </tbody>
+        </table>
+      {% endif %}
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <td class="text-start w-50">{{ text_description }}</td>
+            <td class="text-start w-50">{{ text_quantity }}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-start"><a href="{{ product }}">{{ name }}</a>
+              <br/>{{ description }}</td>
+            <td class="text-start">{{ product_quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>{{ text_history }}</h2>
+      <div id="history">{{ history }}</div>
+      <h2>{{ text_order }}</h2>
+      <div id="order">{{ order }}</div>
+      <div class="text-end mt-3"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+<script type="text/javascript"><!--
+$('#history').on('click', '.pagination a', function(e) {
+    e.preventDefault();
+
+    $('#history').load(this.href);
+});
+
+$('#order').on('click', '.pagination a', function(e) {
+    e.preventDefault();
+
+    $('#order').load(this.href);
+});
+//--></script>
+{{ footer }}
